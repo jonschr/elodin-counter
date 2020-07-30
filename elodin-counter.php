@@ -4,7 +4,7 @@
 	Plugin URI: https://github.com/jonschr/elodin-counter
     GitHub Plugin URI: https://github.com/jonschr/elodin-counter
 	Description: Just another counter plugin
-	Version: 0.2
+	Version: 0.2.1
     Author: Jon Schroeder
     Author URI: http://elod.in
 
@@ -37,7 +37,6 @@ function elodin_counter_add_scripts() {
 
 function counter_shortcode( $atts ) {
     
-    // Waypoints
     wp_enqueue_script( 'elodin-counter-waypoints' );
     wp_enqueue_script( 'elodin-counter' );
     wp_enqueue_script( 'elodin-counter-init' );

@@ -4,7 +4,7 @@
 	Plugin URI: https://github.com/jonschr/elodin-counter
     GitHub Plugin URI: https://github.com/jonschr/elodin-counter
 	Description: Just another counter plugin
-	Version: 0.1
+	Version: 0.2
     Author: Jon Schroeder
     Author URI: http://elod.in
 
@@ -27,9 +27,8 @@ add_action( 'wp_enqueue_scripts', 'elodin_counter_add_scripts' );
 function elodin_counter_add_scripts() {
 
     wp_register_script( 'elodin-counter-waypoints', '//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js', array( 'jquery' ), false, false );
-
-    wp_register_script( 'elodin-counter', plugins_url( '/js/counter.min.js', __FILE__), array( 'jquery', 'elodin-counter-waypoints' ), false, false );
-
+    wp_register_script( 'elodin-counter', plugins_url( '/js/counter.min.js', __FILE__), array( 'elodin-counter-waypoints' ), false, false );
+    wp_register_script( 'elodin-counter-init', plugins_url( '/js/counter-init.js', __FILE__), array( 'elodin-counter' ), $rand, false );
 }
 
 ///////////////
@@ -40,32 +39,16 @@ function counter_shortcode( $atts ) {
     
     // Waypoints
     wp_enqueue_script( 'elodin-counter-waypoints' );
-
-    // Jquery counter
     wp_enqueue_script( 'elodin-counter' );
-
+    wp_enqueue_script( 'elodin-counter-init' );
+    
     $atts = shortcode_atts( array(
         'number'   => null,
         'delay'    => 10,
         'time'     => 2000,
     ), $atts );
-
-    $number = $atts['number'];
-    $rand = rand( 1, 10000 );
-    ?>
-    <script>
-        jQuery(document).ready(function($) {
-            $('.counter-<?php echo $rand; ?>').counterUp({
-                delay: <?php echo $atts['delay']; ?>,
-                time: <?php echo $atts['time']; ?>,
-            });
-        });
-    </script>
-
-    <?php
-    // return "foo = {$atts['foo']}";
-    
-    $output = sprintf( '<span class="counter counter-%s">%s</span>', $rand, $number );
+        
+    $output = sprintf( '<span data-delay="%s" data-time="%s" class="elodin-counter">%s</span>', $atts['delay'], $atts['time'], $atts['number'] );
     return $output;
 }
 add_shortcode( 'counter', 'counter_shortcode' );

@@ -2,7 +2,6 @@
 /*
 	Plugin Name: Counter
 	Plugin URI: https://github.com/jonschr/elodin-counter
-    GitHub Plugin URI: https://github.com/jonschr/elodin-counter
 	Description: Just another counter plugin
 	Version: 0.2.1
     Author: Jon Schroeder

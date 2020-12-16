@@ -3,7 +3,7 @@
 	Plugin Name: Counter
 	Plugin URI: https://github.com/jonschr/elodin-counter
 	Description: Just another counter plugin
-	Version: 0.2.1
+	Version: 0.2.2
     Author: Jon Schroeder
     Author URI: http://elod.in
 
@@ -19,15 +19,16 @@
 */
 
 // Plugin Directory 
-define( 'COUNTER_DIR', dirname( __FILE__ ) );
+define( 'ELODIN_COUNTER_DIR', dirname( __FILE__ ) );
+define( 'ELODIN_COUNTER_VERSION', '0.2.2' );
 
 //* Enqueue scripts and styles
 add_action( 'wp_enqueue_scripts', 'elodin_counter_add_scripts' );
 function elodin_counter_add_scripts() {
 
-    wp_register_script( 'elodin-counter-waypoints', '//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js', array( 'jquery' ), false, false );
-    wp_register_script( 'elodin-counter', plugins_url( '/js/counter.min.js', __FILE__), array( 'elodin-counter-waypoints' ), false, false );
-    wp_register_script( 'elodin-counter-init', plugins_url( '/js/counter-init.js', __FILE__), array( 'elodin-counter' ), $rand, false );
+    wp_register_script( 'elodin-counter-waypoints', '//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js', array( 'jquery' ), ELODIN_COUNTER_VERSION, false );
+    wp_register_script( 'elodin-counter', plugins_url( '/js/counter.min.js', __FILE__), array( 'elodin-counter-waypoints' ), ELODIN_COUNTER_VERSION, false );
+    wp_register_script( 'elodin-counter-init', plugins_url( '/js/counter-init.js', __FILE__), array( 'elodin-counter' ), ELODIN_COUNTER_VERSION, false );
 }
 
 ///////////////
